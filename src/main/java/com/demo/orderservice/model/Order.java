@@ -5,6 +5,7 @@
  */
 package com.demo.orderservice.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,7 +24,7 @@ import org.hibernate.annotations.Type;
  */
 @Entity
 @Table(name = "loan_order")
-public class Order {
+public class Order implements Serializable {
 
     private Long id;
     private String description;
