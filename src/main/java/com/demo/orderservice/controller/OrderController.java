@@ -12,6 +12,7 @@ import com.demo.orderservice.model.Surveyor;
 import com.demo.orderservice.service.OrderServiceImpl;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +30,7 @@ public class OrderController {
     @Autowired
     private OrderServiceImpl orderServiceImpl;
 
-    @RequestMapping("/get_orders/{surveyorId}")
+    @GetMapping("get_orders/{surveyorId}")
     public List<Order> getOrders(@PathVariable("surveyorId") Long surveyorId) throws Exception {
         return orderServiceImpl.getOrders(surveyorId);
 
