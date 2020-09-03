@@ -4,9 +4,9 @@
     <modelVersion>4.0.0</modelVersion>
     
     <groupId>com.demo</groupId>
-    <artifactId>T-order-service</artifactId>
+    <artifactId>T-survey-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>T-order-service</name>
+    <name>T-survey-service</name>
     <description>Demo project for Spring Boot</description>
     
     <parent>
