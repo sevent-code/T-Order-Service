@@ -20,16 +20,14 @@ public class ApiException {
     private LocalDateTime timestamp;
     private HttpStatus status;
     private String message;
-    private Throwable throwable;
 
     public ApiException() {
     }
 
-    public ApiException(LocalDateTime timestamp, HttpStatus status, String message, Throwable throwable) {
+    public ApiException(LocalDateTime timestamp, HttpStatus status, String message) {
         this.timestamp = timestamp;
         this.status = status;
         this.message = message;
-        this.throwable = throwable;
     }
 
     public LocalDateTime getTimestamp() {
@@ -42,10 +40,6 @@ public class ApiException {
 
     public String getMessage() {
         return message;
-    }
-
-    public Throwable getThrowable() {
-        return throwable;
     }
 
 }

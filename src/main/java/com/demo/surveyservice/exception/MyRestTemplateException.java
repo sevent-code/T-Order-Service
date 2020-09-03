@@ -19,13 +19,11 @@ public class MyRestTemplateException extends RuntimeException {
     private LocalDateTime timestamp;
     private HttpStatus status;
     private String message;
-    private Throwable throwable;
 
-    public MyRestTemplateException(LocalDateTime timestamp, HttpStatus status, String message, Throwable throwable) {
+    public MyRestTemplateException(LocalDateTime timestamp, HttpStatus status, String message) {
         this.timestamp = timestamp;
         this.status = status;
         this.message = message;
-        this.throwable = throwable;
     }
 
     public LocalDateTime getTimestamp() {
@@ -40,8 +38,5 @@ public class MyRestTemplateException extends RuntimeException {
         return message;
     }
 
-    public Throwable getThrowable() {
-        return throwable;
-    }
 
 }

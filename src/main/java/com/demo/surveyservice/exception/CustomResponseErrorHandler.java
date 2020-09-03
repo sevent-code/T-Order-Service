@@ -48,8 +48,7 @@ public class CustomResponseErrorHandler implements ResponseErrorHandler {
 
                 ObjectMapper objectMapper = MyUtil.getObjectMapper();
                 ApiException apiException = objectMapper.readValue(httpBodyResponse, ApiException.class);
-
-                throw new MyRestTemplateException(apiException.getTimestamp(), apiException.getStatus(), apiException.getMessage(), apiException.getThrowable());
+                throw new MyRestTemplateException(apiException.getTimestamp(), apiException.getStatus(), apiException.getMessage());
             }
         }
     }

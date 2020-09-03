@@ -25,8 +25,7 @@ public class ApiExceptionHandler {
         ApiException exception = new ApiException(
                 LocalDateTime.now(),
                 e.getStatus(),
-                e.getMessage(),
-                e.getThrowable()
+                e.getMessage()
         );
         
         return new ResponseEntity<>(exception, e.getStatus());
@@ -38,8 +37,7 @@ public class ApiExceptionHandler {
         ApiException exception = new ApiException(
                 LocalDateTime.now(),
                 badRequest,
-                e.getMessage(),
-                e
+                e.getMessage()
         );
         
         return new ResponseEntity<>(exception, badRequest);
