@@ -6,6 +6,8 @@
 package com.demo.surveyservice.repository;
 
 import com.demo.surveyservice.model.Survey;
+import com.demo.surveyservice.model.Surveyor;
+import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,5 +17,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface SurveyRepository extends CrudRepository<Survey, Long> {
-    
+    List<Survey> findBySurveyor(Surveyor surveyor);
 }
