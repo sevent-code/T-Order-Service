@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.demo.orderservice.model;
+package com.demo.loansubmissionservice.model;
 
 import java.io.Serializable;
 import javax.persistence.Column;

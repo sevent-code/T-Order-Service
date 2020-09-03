@@ -1,4 +1,4 @@
-package com.demo.orderservice;
+package com.demo.loansubmissionservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

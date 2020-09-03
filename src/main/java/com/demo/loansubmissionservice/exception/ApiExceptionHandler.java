@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.demo.orderservice.exception;
+package com.demo.loansubmissionservice.exception;
 
-import com.demo.orderservice.dto.ApiException;
+import com.demo.loansubmissionservice.dto.ApiException;
 import java.time.LocalDateTime;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,4 +31,17 @@ public class ApiExceptionHandler {
         
         return new ResponseEntity<>(exception, e.getStatus());
     };
+    
+    @ExceptionHandler(value = {MyResourceException.class})
+    public ResponseEntity<Object> handleApiRequestExcption(MyResourceException e) {
+        HttpStatus badRequest = HttpStatus.INTERNAL_SERVER_ERROR;
+        ApiException exception = new ApiException(
+                LocalDateTime.now(),
+                badRequest,
+                e.getMessage(),
+                e
+        );
+        
+        return new ResponseEntity<>(exception, badRequest);
+    }; 
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.demo.orderservice.model;
+package com.demo.loansubmissionservice.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -23,8 +23,8 @@ import org.hibernate.annotations.Type;
  * @author Steven Raylianto K.
  */
 @Entity
-@Table(name = "loan_order")
-public class Order implements Serializable {
+@Table(name = "loan_submission")
+public class LoanSubmission implements Serializable {
 
     private Long id;
     private String description;
@@ -33,7 +33,7 @@ public class Order implements Serializable {
     private LocalDateTime createDateTime;
     private Surveyor surveyor;
 
-    public Order() {
+    public LoanSubmission() {
     }
 
     @Id

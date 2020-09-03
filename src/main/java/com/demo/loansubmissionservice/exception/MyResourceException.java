@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.demo.orderservice.repository;
-
-import com.demo.orderservice.model.Order;
-import org.springframework.data.repository.CrudRepository;
+package com.demo.loansubmissionservice.exception;
 
 /**
  *
  * @author Steven Raylianto K.
  */
-public interface OrderRepository extends CrudRepository<Order, Long> {
-    
+public class MyResourceException extends RuntimeException {
+
+    public MyResourceException(String error) {
+        super(error);
+    }
 }

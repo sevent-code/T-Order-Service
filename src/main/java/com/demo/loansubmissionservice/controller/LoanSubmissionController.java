@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.demo.orderservice.controller;
+package com.demo.loansubmissionservice.controller;
 
 
-import com.demo.orderservice.exception.MyResourceNotFoundException;
-import com.demo.orderservice.model.Order;
-import com.demo.orderservice.model.Surveyor;
-import com.demo.orderservice.service.OrderServiceImpl;
+import com.demo.loansubmissionservice.exception.MyResourceNotFoundException;
+import com.demo.loansubmissionservice.model.LoanSubmission;
+import com.demo.loansubmissionservice.model.Surveyor;
+import com.demo.loansubmissionservice.service.LoanSubmissionServiceImpl;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,13 +25,13 @@ import org.springframework.web.client.RestTemplate;
  */
 @RestController
 @RequestMapping("/order")
-public class OrderController {
+public class LoanSubmissionController {
 
     @Autowired
-    private OrderServiceImpl orderServiceImpl;
+    private LoanSubmissionServiceImpl orderServiceImpl;
 
     @GetMapping("get_orders/{surveyorId}")
-    public List<Order> getOrders(@PathVariable("surveyorId") Long surveyorId) throws Exception {
+    public List<LoanSubmission> getOrders(@PathVariable("surveyorId") Long surveyorId) throws Exception {
         return orderServiceImpl.getOrders(surveyorId);
 
     }

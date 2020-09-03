@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.demo.orderservice.exception;
+package com.demo.loansubmissionservice.exception;
 
-import com.demo.orderservice.dto.ApiException;
-import com.demo.orderservice.utility.MyUtil;
+import com.demo.loansubmissionservice.dto.ApiException;
+import com.demo.loansubmissionservice.utility.MyUtil;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
