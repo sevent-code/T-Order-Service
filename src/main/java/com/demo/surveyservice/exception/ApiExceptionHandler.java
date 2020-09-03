@@ -42,4 +42,16 @@ public class ApiExceptionHandler {
         
         return new ResponseEntity<>(exception, badRequest);
     }; 
+    
+    @ExceptionHandler(value = {MyResourceNotFoundException.class})
+    public ResponseEntity<Object> handleApiRequestExcption(MyResourceNotFoundException e) {
+        HttpStatus badRequest = HttpStatus.BAD_REQUEST;
+        ApiException exception = new ApiException(
+                LocalDateTime.now(),
+                badRequest,
+                e.getMessage()
+        );
+        
+        return new ResponseEntity<>(exception, badRequest);
+    }; 
 }
