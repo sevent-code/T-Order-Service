@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.demo.loansubmissionservice.config;
+package com.demo.surveyservice.config;
 
 import java.util.Collections;
 import org.springframework.context.annotation.Bean;
@@ -36,8 +36,8 @@ public class ApplicationConfig {
     
     private ApiInfo apiDetails() {
         return new ApiInfo(
-                "Order Loan API",
-                "API Order Loan for T application",
+                "Survey API",
+                "API Survey for T application",
                 "1.0",
                 "Use it wisely",
                 new springfox.documentation.service.Contact("Steven Raylianto", "https://www.linkedin.com/in/steven-raylianto-752951116/", "StevenRaylianto.Kertajadi@mitrais.com"),

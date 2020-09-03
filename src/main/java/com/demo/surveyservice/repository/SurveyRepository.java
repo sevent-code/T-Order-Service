@@ -3,15 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.demo.loansubmissionservice.repository;
+package com.demo.surveyservice.repository;
 
-import com.demo.loansubmissionservice.model.LoanSubmission;
+import com.demo.surveyservice.model.Survey;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Steven Raylianto K.
  */
-public interface LoanSubmissionRepository extends CrudRepository<LoanSubmission, Long> {
+@Repository
+public interface SurveyRepository extends CrudRepository<Survey, Long> {
     
 }

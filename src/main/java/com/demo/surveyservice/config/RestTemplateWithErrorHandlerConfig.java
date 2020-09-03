@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.demo.loansubmissionservice.config;
+package com.demo.surveyservice.config;
 
-import com.demo.loansubmissionservice.exception.CustomResponseErrorHandler;
+import com.demo.surveyservice.exception.CustomResponseErrorHandler;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;

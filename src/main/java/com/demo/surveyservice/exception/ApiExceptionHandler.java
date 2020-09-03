@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.demo.loansubmissionservice.exception;
+package com.demo.surveyservice.exception;
 
-import com.demo.loansubmissionservice.dto.ApiException;
+import com.demo.surveyservice.dto.ApiException;
 import java.time.LocalDateTime;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
