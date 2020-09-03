@@ -36,12 +36,21 @@ public class SurveyController {
 
     @Autowired
     private SurveyServiceImpl surveyService;
-
-    @GetMapping("/find-by-surveyor-id")
-    public ApiResponse findSurveyBySurveyorId(@RequestParam("value") Long value, HttpServletRequest http) throws Exception {
+    
+    @GetMapping("/find-survey-by-surveyor-id")
+    @ApiOperation(value = "Find survey by surveyor id", response = Survey.class)
+    public Survey findSurveyBySurveyorId(@RequestParam("value") Long value, HttpServletRequest http) throws Exception {
         System.out.println("Request From " + http.getRemoteAddr() + " on " + http.getServletPath());
         
-        List<Survey> surveys = surveyService.findSurveyBySurveyorId(value);
+        return surveyService.findSurveyBySurveyId(value);
+    }
+    
+    @GetMapping("/find-surveys-by-surveyor-id")
+    @ApiOperation(value = "Find list survey by surveyor id", response = ApiResponse.class)
+    public ApiResponse findSurveysBySurveyorId(@RequestParam("value") Long value, HttpServletRequest http) throws Exception {
+        System.out.println("Request From " + http.getRemoteAddr() + " on " + http.getServletPath());
+        
+        List<Survey> surveys = surveyService.findSurveysBySurveyorId(value);
         ResponseListSurvey wrapperSurveys = new ResponseListSurvey(surveys);
         return MyUtil.buildResponseWrapper("Fetch successfull", wrapperSurveys);
 
