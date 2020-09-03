@@ -5,17 +5,24 @@
  */
 package com.demo.surveyservice.controller;
 
-
+import com.demo.surveyservice.dto.ApiResponse;
+import com.demo.surveyservice.dto.RequestCreateSurvey;
+import com.demo.surveyservice.dto.ResponseListSurvey;
+import com.demo.surveyservice.enums.StatusSurvey;
 import com.demo.surveyservice.exception.MyResourceNotFoundException;
 import com.demo.surveyservice.model.Survey;
-import com.demo.surveyservice.model.Surveyor;
 import com.demo.surveyservice.service.SurveyServiceImpl;
+import com.demo.surveyservice.utility.MyUtil;
+import io.swagger.annotations.ApiOperation;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -28,11 +35,25 @@ import org.springframework.web.client.RestTemplate;
 public class SurveyController {
 
     @Autowired
-    private SurveyServiceImpl orderServiceImpl;
+    private SurveyServiceImpl surveyService;
 
-    @GetMapping("get_orders/{surveyorId}")
-    public List<Survey> getOrders(@PathVariable("surveyorId") Long surveyorId) throws Exception {
-        return orderServiceImpl.getSurveys(surveyorId);
+    @GetMapping("/find-by-surveyor-id")
+    public ApiResponse findSurveyBySurveyorId(@RequestParam("value") Long value, HttpServletRequest http) throws Exception {
+        System.out.println("Request From " + http.getRemoteAddr() + " on " + http.getServletPath());
+        
+        List<Survey> surveys = surveyService.findSurveyBySurveyorId(value);
+        ResponseListSurvey wrapperSurveys = new ResponseListSurvey(surveys);
+        return MyUtil.buildResponseWrapper("Fetch successfull", wrapperSurveys);
 
+    }
+
+    @PostMapping("/create")
+    @ApiOperation(value = "Create a new survey", response = ApiResponse.class)
+    public ApiResponse createSurvey(@RequestBody RequestCreateSurvey requestData, HttpServletRequest http) throws Exception {
+        System.out.println("Request From " + http.getRemoteAddr() + " on " + http.getServletPath());
+        System.out.println("Data -> " + requestData.toString());
+
+        Survey survey = surveyService.createSurvey(requestData);
+        return MyUtil.buildResponseWrapper("Survey created successfull", survey);
     }
 }
