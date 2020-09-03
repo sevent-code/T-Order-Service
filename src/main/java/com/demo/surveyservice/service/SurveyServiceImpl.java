@@ -8,6 +8,7 @@ package com.demo.surveyservice.service;
 import com.demo.surveyservice.dto.RequestCreateSurvey;
 import com.demo.surveyservice.enums.StatusSurvey;
 import com.demo.surveyservice.exception.MyResourceException;
+import com.demo.surveyservice.exception.MyResourceNotFoundException;
 import com.demo.surveyservice.model.Survey;
 import com.demo.surveyservice.model.Surveyor;
 import java.util.List;
@@ -48,7 +49,12 @@ public class SurveyServiceImpl implements SurveyService {
     }
 
     @Override
-    public List<Survey> findSurveyBySurveyorId(Long surveyorId) throws Exception{
+    public Survey findSurveyBySurveyId(Long surveyId) throws Exception {
+        return surveyRepository.findById(surveyId).orElseThrow(() -> new MyResourceNotFoundException("Cannot find survey by id " + surveyId));
+    }
+
+    @Override
+    public List<Survey> findSurveysBySurveyorId(Long surveyorId) throws Exception {
         Surveyor surveyor = restTemplate.getForObject("http://surveyor-service/surveyor/find-by-id?value=" + surveyorId, Surveyor.class);
         List<Survey> surveys = surveyRepository.findBySurveyor(surveyor);
         return surveys.isEmpty() ? new ArrayList<>() : surveys;
@@ -62,4 +68,5 @@ public class SurveyServiceImpl implements SurveyService {
         }).orElseThrow(() -> new MyResourceException("Error when update survey with id " + id));
 
     }
+
 }

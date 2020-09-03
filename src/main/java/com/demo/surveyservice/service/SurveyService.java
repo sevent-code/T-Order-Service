@@ -18,5 +18,6 @@ public interface SurveyService {
     Survey createSurvey(RequestCreateSurvey survey);
     Survey updateSurvey(Long id, Survey survey);
     void deleteSurvey(Long id);
-    List<Survey> findSurveyBySurveyorId(Long surveyorId) throws Exception;
+    Survey findSurveyBySurveyId(Long surveyId) throws Exception;
+    List<Survey> findSurveysBySurveyorId(Long surveyorId) throws Exception;
 }
