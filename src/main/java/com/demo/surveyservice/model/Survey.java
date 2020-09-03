@@ -6,6 +6,7 @@
 package com.demo.surveyservice.model;
 
 import com.demo.surveyservice.enums.StatusSurvey;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -13,6 +14,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,19 +31,25 @@ import org.hibernate.annotations.Type;
  * @author Steven Raylianto K.
  */
 @Entity
-@Table(name = "survey_loan")
+@Table(name = "survey")
 public class Survey implements Serializable {
 
     private Long id;
     private String description;
-    private Double latitude;
-    private Double longitude;
+    private String profileAddress;
     private StatusSurvey statusLoan;
     private LocalDateTime createDateTime;
     private LocalDateTime modifyDateTime;
     private Surveyor surveyor;
 
     public Survey() {
+    }
+
+    public Survey(String description, String profileAddress, StatusSurvey statusLoan, Surveyor surveyor) {
+        this.description = description;
+        this.profileAddress = profileAddress;
+        this.statusLoan = statusLoan;
+        this.surveyor = surveyor;
     }
 
     @Id
@@ -58,14 +66,9 @@ public class Survey implements Serializable {
         return description;
     }
 
-    @Column(name = "latitude")
-    public Double getLatitude() {
-        return latitude;
-    }
-
-    @Column(name = "longitude")
-    public Double getLongitude() {
-        return longitude;
+    @Column(name = "profile_address")
+    public String getProfileAddress() {
+        return profileAddress;
     }
 
     @Column(name = "status_loan")
@@ -84,7 +87,8 @@ public class Survey implements Serializable {
         return modifyDateTime;
     }
 
-    @ManyToOne
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "surveyor", referencedColumnName = "id")
     public Surveyor getSurveyor() {
         return surveyor;
@@ -108,12 +112,8 @@ public class Survey implements Serializable {
         this.description = description;
     }
 
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
-    }
-
-    public void setLongitude(Double longitude) {
-        this.longitude = longitude;
+    public void setProfileAddress(String profileAddress) {
+        this.profileAddress = profileAddress;
     }
 
     public void setCreateDateTime(LocalDateTime createDateTime) {
@@ -134,7 +134,7 @@ public class Survey implements Serializable {
 
     @Override
     public String toString() {
-        return "Order{" + "id=" + id + ", description=" + description + ", latitude=" + latitude + ", longitude=" + longitude + ", createDateTime=" + createDateTime + ", surveyor=" + surveyor + '}';
+        return "Survey{" + "id=" + id + ", description=" + description + ", profileAddress=" + profileAddress + ", statusLoan=" + statusLoan + ", createDateTime=" + createDateTime + ", modifyDateTime=" + modifyDateTime + ", surveyor=" + surveyor + '}';
     }
 
 }
