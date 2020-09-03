@@ -5,6 +5,7 @@
  */
 package com.demo.surveyservice.service;
 
+import com.demo.surveyservice.dto.RequestCreateSurvey;
 import com.demo.surveyservice.model.Survey;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +15,8 @@ import org.springframework.http.ResponseEntity;
  * @author Steven Raylianto K.
  */
 public interface SurveyService {
-    Survey createSurvey(Survey survey);
+    Survey createSurvey(RequestCreateSurvey survey);
     Survey updateSurvey(Long id, Survey survey);
     void deleteSurvey(Long id);
-    List<Survey> getSurveys(Long surveyorId);
+    List<Survey> findSurveyBySurveyorId(Long surveyorId) throws Exception;
 }

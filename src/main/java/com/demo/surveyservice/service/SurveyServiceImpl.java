@@ -5,6 +5,8 @@
  */
 package com.demo.surveyservice.service;
 
+import com.demo.surveyservice.dto.RequestCreateSurvey;
+import com.demo.surveyservice.enums.StatusSurvey;
 import com.demo.surveyservice.exception.MyResourceException;
 import com.demo.surveyservice.model.Survey;
 import com.demo.surveyservice.model.Surveyor;
@@ -16,6 +18,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 import java.util.Optional;
 import com.demo.surveyservice.repository.SurveyRepository;
+import java.util.ArrayList;
 
 /**
  *
@@ -31,19 +34,10 @@ public class SurveyServiceImpl implements SurveyService {
     private SurveyRepository surveyRepository;
 
     @Override
-    public Survey createSurvey(Survey survey) {
+    public Survey createSurvey(RequestCreateSurvey requestSurvey) {
+        Surveyor surveyor = restTemplate.getForObject("http://surveyor-service/surveyor/find-by-id?value=" + requestSurvey.getSurveyorId(), Surveyor.class);
+        Survey survey = new Survey(requestSurvey.getDescription(), requestSurvey.getProfileAddress(), StatusSurvey.NEED_SURVEY, surveyor);
         return surveyRepository.save(survey);
-    }
-
-    @Override
-    public Survey updateSurvey(Long id, Survey survey) {
-        return surveyRepository.findById(id).map(order -> {
-            order.setDescription(survey.getDescription());
-            order.setLatitude(survey.getLatitude());
-            order.setLongitude(survey.getLongitude());
-            return surveyRepository.save(order);
-        }).orElseThrow(() -> new MyResourceException("Error when update survey with id " + id));
-
     }
 
     @Override
@@ -54,10 +48,18 @@ public class SurveyServiceImpl implements SurveyService {
     }
 
     @Override
-    public List<Survey> getSurveys(Long surveyorId) {
+    public List<Survey> findSurveyBySurveyorId(Long surveyorId) throws Exception{
         Surveyor surveyor = restTemplate.getForObject("http://surveyor-service/surveyor/find-by-id?value=" + surveyorId, Surveyor.class);
-        
-        return null;
+        List<Survey> surveys = surveyRepository.findBySurveyor(surveyor);
+        return surveys.isEmpty() ? new ArrayList<>() : surveys;
     }
 
+    @Override
+    public Survey updateSurvey(Long id, Survey survey) {
+        return surveyRepository.findById(id).map(order -> {
+            order.setDescription(survey.getDescription());
+            return surveyRepository.save(order);
+        }).orElseThrow(() -> new MyResourceException("Error when update survey with id " + id));
+
+    }
 }
